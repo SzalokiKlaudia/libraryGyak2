@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -11,7 +12,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return User::all();
     }
 
     /**
@@ -19,7 +20,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+           // Új felhasználót hoz létre az users táblában a kliens által megadott adatok alapján.
+           $record = new User();
+
+           //Az űrlapról vagy API-kérésből érkező összes adatot kinyeri.
+           //Csak azok a mezők kerülnek kitöltésre, amelyeket a $fillable tulajdonság engedélyezett a User modellben
+           $record->fill($request->all()); 
+   
+           //Az adatokat elmenti az adatbázisban
+           $record->save();
     }
 
     /**
@@ -27,7 +36,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return User::find($id);
     }
 
     /**
@@ -35,7 +44,10 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $record = User::find($id);
+        $record->fill($request->all());
+        $record->save();
+
     }
 
     /**
@@ -43,6 +55,6 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        User::find($id)->delete();
     }
 }
