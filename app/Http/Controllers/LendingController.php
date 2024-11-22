@@ -33,7 +33,7 @@ class LendingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $user_id,$copy_id,$start)
+    public function show($user_id,$copy_id,$start)
     {
          //A fenti show metódus egy Laravel controllerben 
          //egy adott Lending (kölcsönzés) rekordot keres a user_id, copy_id és start mezők alapján, majd visszaadja az első (vagy a megfelelő) találatot.
